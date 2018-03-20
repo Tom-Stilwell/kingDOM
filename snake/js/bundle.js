@@ -293,6 +293,9 @@ class View {
       if (this.isArrayInArray(this.board.snake.segments, pos)) {
         $k(li).removeClass();
         $k(li).addClass("segment");
+        if (this.arraysEqual(this.board.snake.head, pos)) {
+          $k(li).addClass("head");
+        }
       } else if (this.arraysEqual(this.apple, pos)) {
         $k(li).addClass("apple");
       } else {

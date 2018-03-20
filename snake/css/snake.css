@@ -91,6 +91,10 @@ body {
   background-color: lime;
 }
 
+#game li.head {
+  background-color: black;
+}
+
 #game li.apple {
   background-color: red;
 }
