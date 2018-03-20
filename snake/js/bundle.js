@@ -76,7 +76,7 @@ class Snake {
 
   move() {
     const head = this.segments[0];
-    // debugger
+    //
     if (this.direction === "N") {
       this.segments.unshift([head[0] - 1, head[1]]);
     } else if (this.direction === "S") {
@@ -86,7 +86,7 @@ class Snake {
     } else {
       this.segments.unshift([head[0], head[1] + 1]);
     }
-    // debugger
+    //
     this.segments.pop();
     this.head = this.segments[0];
   }
@@ -103,7 +103,6 @@ class Snake {
   }
 
   eat() {
-    // debugger;
     this.segments = this.segments.concat([null]);
   }
 
@@ -145,7 +144,6 @@ class Board {
   }
 
   isLost() {
-    // debugger
     if (
       this.snake.head[0] > 9 ||
       this.snake.head[0] < 0 ||
@@ -239,7 +237,7 @@ class View {
   bindEvents($kel) {
     $k(document).on("keypress", event => {
       let direction = null;
-      // debugger
+      //
       if (event.keyCode === 97) {
         direction = "W";
       } else if (event.keyCode === 119) {
@@ -288,7 +286,6 @@ class View {
         .data("pos")
         .split(",")
         .map(num => parseInt(num));
-      // debugger;
 
       if (this.isArrayInArray(this.board.snake.segments, pos)) {
         $k(li).removeClass();
@@ -299,14 +296,12 @@ class View {
       } else if (this.arraysEqual(this.apple, pos)) {
         $k(li).addClass("apple");
       } else {
-        // debugger;
         $k(li).removeClass();
       }
     });
   }
 
   updateScore(value = 0) {
-    // debugger;
     this.score += value;
     $k("#score").html(`Score : ${this.score}`);
   }

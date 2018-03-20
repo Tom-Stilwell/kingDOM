@@ -43,7 +43,7 @@ class View {
   bindEvents($kel) {
     $k(document).on("keypress", event => {
       let direction = null;
-      // debugger
+      //
       if (event.keyCode === 97) {
         direction = "W";
       } else if (event.keyCode === 119) {
@@ -92,7 +92,6 @@ class View {
         .data("pos")
         .split(",")
         .map(num => parseInt(num));
-      // debugger;
 
       if (this.isArrayInArray(this.board.snake.segments, pos)) {
         $k(li).removeClass();
@@ -103,14 +102,12 @@ class View {
       } else if (this.arraysEqual(this.apple, pos)) {
         $k(li).addClass("apple");
       } else {
-        // debugger;
         $k(li).removeClass();
       }
     });
   }
 
   updateScore(value = 0) {
-    // debugger;
     this.score += value;
     $k("#score").html(`Score : ${this.score}`);
   }

@@ -20,7 +20,6 @@ class Board {
   }
 
   isLost() {
-    // debugger
     if (
       this.snake.head[0] > 9 ||
       this.snake.head[0] < 0 ||
