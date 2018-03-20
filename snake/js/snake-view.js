@@ -65,7 +65,7 @@ class View {
       this.renderBoard();
       if (this.board.isLost()) {
         this.$kel.append("<div id='loss' />");
-        $k("#loss").html("You Lose");
+        $k("#loss").html("Game Over");
         if (this.score > this.highestScore) {
           this.highestScore = this.score;
         }

@@ -1,6 +1,8 @@
 body {
   background-image: url("../snake.jpg");
+  background-position: bottom;
   background-size: cover;
+  height: 100vh;
 }
 
 #game {
@@ -8,7 +10,7 @@ body {
   height: 520px;
   display: block;
   border: 3px solid black;
-  margin: 0 auto;
+  margin-left: 32vw;
 }
 
 #game li {
@@ -57,15 +59,16 @@ body {
 #select-difficulty {
   position: absolute;
   left: 15%;
-  top: 250px;
+  top: 270px;
   font-family: "Jura", sans-serif;
+  font-weight: 500;
 }
 
 #start {
   position: absolute;
   left: 15%;
   top: 220px;
-  font-size: 1vw;
+  font-size: 2vw;
   color: purple;
   font-family: "Jura", sans-serif;
 }
