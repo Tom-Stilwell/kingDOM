@@ -1,4 +1,9 @@
 body {
+  background-image: url("../snake.jpg");
+  background-size: cover;
+}
+
+#game {
   width: 520px;
   height: 520px;
   display: block;
@@ -6,35 +11,63 @@ body {
   margin: 0 auto;
 }
 
-body li {
+#game li {
   width: 50px;
   height: 50px;
   list-style: none;
   float: left;
-  border: 1px solid #ccc;
+  background-color: white;
+  border: 1px solid darkgrey;
+}
+
+.title {
+  display: block;
+  font-family: "Faster One", cursive;
+
+  margin-left: 40vw;
+  font-size: 60px;
+}
+
+.instructions {
+  font-family: "Jura", sans-serif;
+  font-size: 1.5vw;
+  color: purple;
+  position: absolute;
+  left: 5%;
+  top: 370px;
 }
 
 #score {
   position: absolute;
-  left: 15%;
-  font-size: 40px;
-  top: 100px;
+  left: 5%;
+  font-size: 2vw;
+  top: 110px;
   color: gold;
+  font-family: "Jura", sans-serif;
 }
 
 #highestScore {
   position: absolute;
   left: 5%;
-  font-size: 40px;
+  font-size: 2vw;
   color: blue;
+  font-family: "Jura", sans-serif;
+}
+
+#select-difficulty {
+  position: absolute;
+  left: 15%;
+  top: 250px;
+  font-family: "Jura", sans-serif;
 }
 
 #start {
   position: absolute;
   left: 15%;
-  top: 200px;
-  font-size: 20px;
+  top: 220px;
+  font-size: 1vw;
   color: purple;
+  font-family: "Jura", sans-serif;
 }
 
 #start:hover {
@@ -47,13 +80,14 @@ body li {
   position: absolute;
   left: 15%;
   top: 160px;
-  font-size: 30px;
+  font-size: 3vw;
+  font-family: "Jura", sans-serif;
 }
 
-.segment {
+#game li.segment {
   background-color: lime;
 }
 
-.apple {
+#game li.apple {
   background-color: red;
 }

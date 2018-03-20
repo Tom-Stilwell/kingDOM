@@ -184,7 +184,7 @@ const Board = __webpack_require__(1);
 const SnakeView = __webpack_require__(3);
 
 $k(() => {
-  const rootEl = $k("body");
+  const rootEl = $k("#game");
 
   new SnakeView(rootEl);
 });
@@ -206,9 +206,16 @@ class View {
 
   setupStart() {
     this.$kel.append("<button id='start' >Start Game</button>");
+    this.$kel.append(
+      "<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>"
+    );
     this.$kel.append("<div id='highestScore' />");
     $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
+
     $k("#start").on("click", event => {
+      this.difficulty = parseInt(
+        document.querySelector('input[name="difficulty"]:checked').value
+      );
       this.$kel.children().remove();
       this.$kel.append("<div id='score' />");
       for (let i = 0; i < 100; i++) {
@@ -230,7 +237,7 @@ class View {
   }
 
   bindEvents($kel) {
-    $kel.on("keypress", event => {
+    $k(document).on("keypress", event => {
       let direction = null;
       // debugger
       if (event.keyCode === 97) {
@@ -248,28 +255,31 @@ class View {
   }
 
   step() {
-    const id = setInterval(() => {
+    const stepFunc = () => {
       this.board.snake.move();
       this.checkApple();
       this.renderBoard();
       if (this.board.isLost()) {
         this.$kel.append("<div id='loss' />");
         $k("#loss").html("You Lose");
-        clearInterval(id);
         if (this.score > this.highestScore) {
           this.highestScore = this.score;
         }
         this.setupStart();
+      } else {
+        setTimeout(stepFunc, this.difficulty);
       }
-    }, 200);
-    // debugger;
+    };
+    setTimeout(stepFunc, this.difficulty);
   }
 
   checkApple() {
     if (this.arraysEqual(this.board.snake.head, this.apple)) {
       this.board.snake.eat();
-      this.updateScore(1);
+      this.updateScore(100 - this.difficulty / 5);
       this.randomApple();
+      this.difficulty -= 5;
+      // debugger;
     }
   }
 
