@@ -199,21 +199,34 @@ const Board = __webpack_require__(1);
 
 class View {
   constructor($kel) {
-    this.board = new Board();
-    this.score = 0;
-    for (let i = 0; i < 100; i++) {
-      $kel.append("<li>");
-    }
-    // debugger;
-    $k("li").each((li, idx) => {
-      li.id = idx;
-      $k(li).data("pos", [Math.floor(idx / 10), idx % 10]);
+    this.$kel = $kel;
+    this.highestScore = 0;
+    this.setupStart();
+  }
+
+  setupStart() {
+    this.$kel.append("<button id='start' >Start Game</button>");
+    this.$kel.append("<div id='highestScore' />");
+    $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
+    $k("#start").on("click", event => {
+      this.$kel.children().remove();
+      this.$kel.append("<div id='score' />");
+      for (let i = 0; i < 100; i++) {
+        this.$kel.append("<li>");
+      }
+
+      $k("li").each((li, idx) => {
+        li.id = idx;
+        $k(li).data("pos", [Math.floor(idx / 10), idx % 10]);
+      });
+      this.score = 0;
+      this.board = new Board();
+      this.updateScore();
+      this.bindEvents(this.$kel);
+      this.randomApple();
+      $k("#loss").remove();
+      this.step();
     });
-    this.updateScore();
-    this.bindEvents($kel);
-    this.randomApple();
-    this.step();
-    // debuggers;
   }
 
   bindEvents($kel) {
@@ -240,8 +253,13 @@ class View {
       this.checkApple();
       this.renderBoard();
       if (this.board.isLost()) {
-        alert("You Lose!");
+        this.$kel.append("<div id='loss' />");
+        $k("#loss").html("You Lose");
         clearInterval(id);
+        if (this.score > this.highestScore) {
+          this.highestScore = this.score;
+        }
+        this.setupStart();
       }
     }, 200);
     // debugger;
