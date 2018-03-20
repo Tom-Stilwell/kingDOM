@@ -1,0 +1,29 @@
+body {
+  width: 520px;
+  height: 520px;
+  display: block;
+  border: 3px solid black;
+}
+
+body li {
+  width: 50px;
+  height: 50px;
+  list-style: none;
+  float: left;
+  border: 1px solid #ccc;
+}
+
+#score {
+  position: absolute;
+  left: 600px;
+  font-size: 40px;
+  color: gold;
+}
+
+.segment {
+  background-color: lime;
+}
+
+.apple {
+  background-color: red;
+}
