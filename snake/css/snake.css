@@ -94,3 +94,18 @@ body {
 #game li.apple {
   background-color: red;
 }
+
+.contact {
+  font-size: 30px;
+  position: absolute;
+  bottom: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Jura", sans-serif;
+}
+
+.contact img {
+  height: 30px;
+  width: 30px;
+}
