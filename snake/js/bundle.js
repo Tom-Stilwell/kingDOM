@@ -276,10 +276,9 @@ class View {
   checkApple() {
     if (this.arraysEqual(this.board.snake.head, this.apple)) {
       this.board.snake.eat();
-      this.updateScore(100 - this.difficulty / 5);
+      this.updateScore(Math.round(100 - this.difficulty / 5));
       this.randomApple();
-      this.difficulty -= 5;
-      // debugger;
+      this.difficulty = Math.round(this.difficulty * 0.95);
     }
   }
 
