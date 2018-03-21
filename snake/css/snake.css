@@ -73,7 +73,8 @@ body {
   font-family: "Jura", sans-serif;
 }
 
-#start:hover {
+#start:hover,
+#recipe-button:hover {
   cursor: pointer;
   background-color: black;
   color: white;
