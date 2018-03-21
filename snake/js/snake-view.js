@@ -49,7 +49,7 @@ class View {
   setupRecipe() {
     $k("#recipe-button").on("click", () => {
       $k("#recipe").remove();
-      const randomNum = Math.floor(Math.random() * 20);
+      const randomNum = Math.floor(Math.random() * 30);
       $k
         .ajax({
           type: "GET",
