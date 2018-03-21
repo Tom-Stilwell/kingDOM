@@ -204,9 +204,7 @@ class View {
 
   setup() {
     this.$kel.append("<button id='start' >Start Game</button>");
-    this.$kel.append(
-      "<button id='recipe-button'> Random Apple Recipe </button"
-    );
+    this.$kel.append("<button id='recipe-button'> Use Your Apples! </button");
     this.$kel.append(
       "<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>"
     );
