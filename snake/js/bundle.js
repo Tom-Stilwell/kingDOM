@@ -199,17 +199,24 @@ class View {
   constructor($kel) {
     this.$kel = $kel;
     this.highestScore = 0;
-    this.setupStart();
+    this.setup();
   }
 
-  setupStart() {
+  setup() {
     this.$kel.append("<button id='start' >Start Game</button>");
+    this.$kel.append(
+      "<button id='recipe-button'> Random Apple Recipe </button"
+    );
     this.$kel.append(
       "<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>"
     );
     this.$kel.append("<div id='highestScore' />");
     $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
+    this.setupStart();
+    this.setupRecipe();
+  }
 
+  setupStart() {
     $k("#start").on("click", event => {
       this.difficulty = parseInt(
         document.querySelector('input[name="difficulty"]:checked').value
@@ -219,7 +226,6 @@ class View {
       for (let i = 0; i < 100; i++) {
         this.$kel.append("<li>");
       }
-
       $k("li").each((li, idx) => {
         li.id = idx;
         $k(li).data("pos", [Math.floor(idx / 10), idx % 10]);
@@ -231,6 +237,28 @@ class View {
       this.randomApple();
       $k("#loss").remove();
       this.step();
+    });
+  }
+
+  setupRecipe() {
+    $k("#recipe-button").on("click", () => {
+      $k("#recipe").remove();
+      const randomNum = Math.floor(Math.random() * 20);
+      $k
+        .ajax({
+          type: "GET",
+          url: `https://api.edamam.com/search?q=apple&app_id=9acf897a&app_key=1ef93aa7e69c45fe986f2c383fdc57de&from=${randomNum}&to=${randomNum +
+            1}`
+        })
+        .then(response => {
+          this.$kel.append(
+            `<div id='recipe'> <a id='recipe-link' href='${
+              JSON.parse(response).hits[0].recipe.url
+            }'>${JSON.parse(response).hits[0].recipe.label}</a></div>`
+          );
+          this.setupStart();
+          this.setupRecipe();
+        });
     });
   }
 
@@ -263,7 +291,7 @@ class View {
         if (this.score > this.highestScore) {
           this.highestScore = this.score;
         }
-        this.setupStart();
+        this.setup();
       } else {
         setTimeout(stepFunc, this.difficulty);
       }

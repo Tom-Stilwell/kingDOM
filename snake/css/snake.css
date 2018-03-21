@@ -99,6 +99,25 @@ body {
   background-color: red;
 }
 
+#recipe-button {
+  position: absolute;
+  right: 5vw;
+  top: 40px;
+  font-size: 2vw;
+  color: purple;
+  font-family: "Jura", sans-serif;
+}
+
+#recipe {
+  position: fixed;
+  z-index: 5;
+  right: 5vw;
+  top: 90px;
+  background-color: white;
+  font-size: 1.5vw;
+  font-family: "Jura", sans-serif;
+}
+
 .contact {
   font-size: 30px;
   position: absolute;
