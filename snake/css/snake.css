@@ -61,6 +61,7 @@ body {
 #highestScore {
   position: absolute;
   left: 5%;
+  top: 80px;
   font-size: 2vw;
   color: blue;
   font-family: "Jura", sans-serif;
