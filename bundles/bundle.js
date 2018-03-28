@@ -92,10 +92,7 @@ class Snake {
   }
 
   turn(direction) {
-    if (
-      direction === null ||
-      this.isOppositeDirections(direction, this.direction)
-    ) {
+    if (direction === null || this.isOppositeDirections(direction, this.direction)) {
       return false;
     }
 
@@ -116,7 +113,6 @@ class Snake {
 }
 
 module.exports = Snake;
-
 
 /***/ }),
 /* 1 */
@@ -144,16 +140,9 @@ class Board {
   }
 
   isLost() {
-    if (
-      this.snake.head[0] > 9 ||
-      this.snake.head[0] < 0 ||
-      this.snake.head[1] > 9 ||
-      this.snake.head[1] < 0
-    ) {
+    if (this.snake.head[0] > 9 || this.snake.head[0] < 0 || this.snake.head[1] > 9 || this.snake.head[1] < 0) {
       return true;
-    } else if (
-      this.isArrayInArray(this.snake.segments.slice(1), this.snake.head)
-    ) {
+    } else if (this.isArrayInArray(this.snake.segments.slice(1), this.snake.head)) {
       return true;
     } else {
       return false;
@@ -163,7 +152,7 @@ class Board {
   isArrayInArray(arr, item) {
     var item_as_string = JSON.stringify(item);
 
-    var contains = arr.some(function(ele) {
+    var contains = arr.some(function (ele) {
       return JSON.stringify(ele) === item_as_string;
     });
     return contains;
@@ -171,7 +160,6 @@ class Board {
 }
 
 module.exports = Board;
-
 
 /***/ }),
 /* 2 */
@@ -186,7 +174,6 @@ $k(() => {
 
   new SnakeView(rootEl);
 });
-
 
 /***/ }),
 /* 3 */
@@ -204,10 +191,8 @@ class View {
 
   setup() {
     this.$kel.append("<button id='start' >Start Game</button>");
-    this.$kel.append("<button id='recipe-button'> Use Your Apples! </button");
-    this.$kel.append(
-      "<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>"
-    );
+    this.$kel.append("<button id='recipe-button'> Use Your Apples! </button>");
+    this.$kel.append("<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>");
     this.$kel.append("<div id='highestScore' />");
     $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
     this.setupStart();
@@ -216,10 +201,10 @@ class View {
 
   setupStart() {
     $k("#start").on("click", event => {
-      this.difficulty = parseInt(
-        document.querySelector('input[name="difficulty"]:checked').value
-      );
+      this.difficulty = parseInt(document.querySelector('input[name="difficulty"]:checked').value);
       this.$kel.children().remove();
+      this.$kel.append("<div id='highestScore' />");
+      $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
       this.$kel.append("<div id='score' />");
       for (let i = 0; i < 100; i++) {
         this.$kel.append("<li>");
@@ -242,21 +227,14 @@ class View {
     $k("#recipe-button").on("click", () => {
       $k("#recipe").remove();
       const randomNum = Math.floor(Math.random() * 30);
-      $k
-        .ajax({
-          type: "GET",
-          url: `https://api.edamam.com/search?q=apple&app_id=9acf897a&app_key=1ef93aa7e69c45fe986f2c383fdc57de&from=${randomNum}&to=${randomNum +
-            1}`
-        })
-        .then(response => {
-          this.$kel.append(
-            `<div id='recipe'> <a id='recipe-link' href='${
-              JSON.parse(response).hits[0].recipe.url
-            }'>${JSON.parse(response).hits[0].recipe.label}</a></div>`
-          );
-          this.setupStart();
-          this.setupRecipe();
-        });
+      $k.ajax({
+        type: "GET",
+        url: `https://api.edamam.com/search?q=apple&app_id=9acf897a&app_key=1ef93aa7e69c45fe986f2c383fdc57de&from=${randomNum}&to=${randomNum + 1}`
+      }).then(response => {
+        this.$kel.append(`<div id='recipe'> <a id='recipe-link' href='${JSON.parse(response).hits[0].recipe.url}'>${JSON.parse(response).hits[0].recipe.label}</a></div>`);
+        this.setupStart();
+        this.setupRecipe();
+      });
     });
   }
 
@@ -308,10 +286,7 @@ class View {
 
   renderBoard() {
     $k("li").each((li, idx) => {
-      const pos = $k(li)
-        .data("pos")
-        .split(",")
-        .map(num => parseInt(num));
+      const pos = $k(li).data("pos").split(",").map(num => parseInt(num));
 
       if (this.isArrayInArray(this.board.snake.segments, pos)) {
         $k(li).removeClass();
@@ -334,7 +309,7 @@ class View {
 
   arraysEqual(arr1, arr2) {
     if (arr1 === arr2) return true;
-    if (arr1 == null || arr2 == null) return false;
+    if (arr1 === null || arr2 === null) return false;
     if (arr1.length !== arr2.length) return false;
 
     for (let i = 0; i < arr1.length; i++) {
@@ -344,10 +319,7 @@ class View {
   }
 
   randomApple() {
-    let apple = [
-      Math.floor(Math.random() * 10),
-      Math.floor(Math.random() * 10)
-    ];
+    let apple = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
 
     while (this.isArrayInArray(this.board.snake.segments, apple)) {
       apple = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
@@ -359,7 +331,7 @@ class View {
   isArrayInArray(arr, item) {
     var itemAsString = JSON.stringify(item);
 
-    var contains = arr.some(function(ele) {
+    var contains = arr.some(function (ele) {
       return JSON.stringify(ele) === itemAsString;
     });
     return contains;
@@ -368,6 +340,6 @@ class View {
 
 module.exports = View;
 
-
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

@@ -10,7 +10,7 @@ class View {
 
   setup() {
     this.$kel.append("<button id='start' >Start Game</button>");
-    this.$kel.append("<button id='recipe-button'> Use Your Apples! </button");
+    this.$kel.append("<button id='recipe-button'> Use Your Apples! </button>");
     this.$kel.append(
       "<form id='select-difficulty'><input type='radio' name='difficulty' value='350' checked> Easy<br><input type='radio' name='difficulty' value='200'> Medium<br><input type='radio' name='difficulty' value='150'> Hard</form>"
     );
@@ -26,6 +26,8 @@ class View {
         document.querySelector('input[name="difficulty"]:checked').value
       );
       this.$kel.children().remove();
+      this.$kel.append("<div id='highestScore' />");
+      $k("#highestScore").html(`Your Highest Score: ${this.highestScore}`);
       this.$kel.append("<div id='score' />");
       for (let i = 0; i < 100; i++) {
         this.$kel.append("<li>");
@@ -140,7 +142,7 @@ class View {
 
   arraysEqual(arr1, arr2) {
     if (arr1 === arr2) return true;
-    if (arr1 == null || arr2 == null) return false;
+    if (arr1 === null || arr2 === null) return false;
     if (arr1.length !== arr2.length) return false;
 
     for (let i = 0; i < arr1.length; i++) {
