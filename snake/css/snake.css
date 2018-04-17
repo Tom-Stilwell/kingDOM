@@ -60,7 +60,7 @@ body {
   position: absolute;
   left: 5%;
   font-size: 2vw;
-  top: 110px;
+  top: calc(90px + 2vw);
   color: gold;
   font-family: "Jura", sans-serif;
 }
